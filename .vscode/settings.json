@@ -3,5 +3,6 @@
 	"editor.formatOnSave": true,
 	"editor.codeActionsOnSave": {
 		"source.organizeImports.biome": "explicit"
-	}
+	},
+	"cSpell.words": ["daisyui", "Noto", "tailwindcss"]
 }
