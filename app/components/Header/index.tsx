@@ -26,7 +26,7 @@ export function Header({
 }: Props) {
 	const { content, buttonStyle, iconStyle } = headerStyle();
 	return (
-		<header className="h-[84px] w-full py-1 px-7 flex items-center justify-between bg-base-100">
+		<header className="h-[84px] w-full py-1 px-7 flex items-center justify-between bg-base-100 drop-shadow-md">
 			<div className={content()}>
 				<button type="button" className={buttonStyle()} onClick={onClickHome}>
 					Home
