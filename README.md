@@ -34,4 +34,6 @@ npm run preview
 >
 > `vite preview` 本番用としては使えません.
 
+## アイコン(SVG)の追加について
 
+[こちら](./app/components/Icons/README.md)を参照

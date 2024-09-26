@@ -1,0 +1,27 @@
+{/* Iconography.mdx */}
+
+import { IconGallery, IconItem, Meta, Title } from "@storybook/blocks";
+
+import {
+  SunLine,
+  MoonLine,
+  GithubLine,
+} from ".";
+
+export const color = "#212121";
+ 
+<Meta title="Iconography" />
+ 
+# Iconography
+ 
+<IconGallery>
+    <IconItem name="sun">
+        <SunLine fill={color} />
+    </IconItem>
+    <IconItem name="MoonLine">
+        <MoonLine fill={color} />
+    </IconItem>
+    <IconItem name="GithubLine">
+        <GithubLine fill={color} />
+    </IconItem>
+</IconGallery>
