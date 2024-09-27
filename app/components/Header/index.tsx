@@ -1,5 +1,6 @@
+import clsx from "clsx";
 import { tv } from "tailwind-variants";
-import { GithubLine, MoonLine } from "../Icons";
+import { GithubLine, MoonLine, SunLine } from "../Icons";
 
 const headerStyle = tv({
 	slots: {
@@ -10,6 +11,8 @@ const headerStyle = tv({
 });
 
 type Props = {
+	className?: string;
+	darkMode: boolean;
 	onClickHome: () => void;
 	onClickAbout: () => void;
 	onClickBlog: () => void;
@@ -18,6 +21,8 @@ type Props = {
 };
 
 export function Header({
+	className,
+	darkMode,
 	onClickAbout,
 	onClickBlog,
 	onClickGithub,
@@ -26,7 +31,12 @@ export function Header({
 }: Props) {
 	const { content, buttonStyle, iconStyle } = headerStyle();
 	return (
-		<header className="h-[84px] w-full py-1 px-7 flex items-center justify-between bg-base-100 drop-shadow-md">
+		<header
+			className={clsx(
+				"h-[84px] w-full py-1 px-7 flex items-center justify-between bg-base-100 drop-shadow-md",
+				className,
+			)}
+		>
 			<div className={content()}>
 				<button type="button" className={buttonStyle()} onClick={onClickHome}>
 					Home
@@ -43,7 +53,11 @@ export function Header({
 					<GithubLine className="text-base-content" />
 				</button>
 				<button type="button" className={iconStyle()} onClick={onClickMode}>
-					<MoonLine className="text-base-content" />
+					{darkMode ? (
+						<SunLine className="text-base-content" />
+					) : (
+						<MoonLine className="text-base-content" />
+					)}
 				</button>
 			</div>
 		</header>
