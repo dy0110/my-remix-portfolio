@@ -48,6 +48,9 @@ export default function Index() {
 						))}
 					</ul>
 				</nav>
+				<button type="button" className="btn btn-primary">
+					Button
+				</button>
 			</div>
 		</div>
 	);
@@ -58,7 +61,6 @@ const resources = [
 		href: "https://remix.run/start/quickstart",
 		text: "Quick Start (5 min)",
 		icon: (
-			// biome-ignore lint/a11y/noSvgWithoutTitle: <explanation>
 			<svg
 				xmlns="http://www.w3.org/2000/svg"
 				width="24"
@@ -80,7 +82,6 @@ const resources = [
 		href: "https://remix.run/start/tutorial",
 		text: "Tutorial (30 min)",
 		icon: (
-			// biome-ignore lint/a11y/noSvgWithoutTitle: <explanation>
 			<svg
 				xmlns="http://www.w3.org/2000/svg"
 				width="24"
@@ -102,7 +103,6 @@ const resources = [
 		href: "https://remix.run/docs",
 		text: "Remix Docs",
 		icon: (
-			// biome-ignore lint/a11y/noSvgWithoutTitle: <explanation>
 			<svg
 				xmlns="http://www.w3.org/2000/svg"
 				width="24"
@@ -123,7 +123,6 @@ const resources = [
 		href: "https://rmx.as/discord",
 		text: "Join Discord",
 		icon: (
-			// biome-ignore lint/a11y/noSvgWithoutTitle: <explanation>
 			<svg
 				xmlns="http://www.w3.org/2000/svg"
 				width="24"
