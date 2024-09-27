@@ -10,5 +10,8 @@ export default {
 			},
 		},
 	},
+	daisyui: {
+		themes: ["light", "cupcake", "dark", "cmyk", "retro"],
+	},
 	plugins: [daisyui],
 } satisfies Config;
