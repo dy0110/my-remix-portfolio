@@ -1,8 +1,9 @@
-import { Outlet } from "@remix-run/react";
+import { Outlet, useNavigate } from "@remix-run/react";
 import { useCallback } from "react";
 // eslint-disable-next-line import/no-named-as-default
 import Particles from "react-tsparticles";
-import type { Container, Engine } from "tsparticles-engine";
+import { $path } from "remix-routes";
+import type { Engine } from "tsparticles-engine";
 import { loadSlim } from "tsparticles-slim";
 import { useSnapshot } from "valtio";
 import { Footer } from "~/components/Footer";
@@ -10,17 +11,12 @@ import { Header } from "~/components/Header";
 import { store } from "~/valtio/store";
 
 export default function _layout() {
+	const navigate = useNavigate();
 	const mode = useSnapshot(store).darkMode;
 	const particlesInit = useCallback(async (engine: Engine) => {
 		await loadSlim(engine);
 	}, []);
 
-	const particlesLoaded = useCallback(
-		async (container: Container | undefined) => {
-			await console.log(container);
-		},
-		[],
-	);
 	return (
 		<div
 			className="w-full h-screen flex flex-col absolute"
@@ -29,10 +25,16 @@ export default function _layout() {
 			<Header
 				className="sticky top-0 z-10"
 				darkMode={mode}
-				onClickAbout={() => {}}
+				onClickAbout={() => {
+					navigate($path("/about"));
+				}}
 				onClickBlog={() => {}}
-				onClickGithub={() => {}}
-				onClickHome={() => {}}
+				onClickGithub={() => {
+					window.open("https://github.com/dy0110");
+				}}
+				onClickHome={() => {
+					navigate($path("/"));
+				}}
 				onClickMode={() => {
 					store.darkMode = !mode;
 				}}
@@ -40,7 +42,6 @@ export default function _layout() {
 			<Particles
 				id="tsparticles"
 				init={particlesInit}
-				loaded={particlesLoaded}
 				options={{
 					fpsLimit: 120,
 					interactivity: {
@@ -110,7 +111,7 @@ export default function _layout() {
 				}}
 			/>
 			<div
-				className="flex justify-center h-screen w-ful"
+				className="flex justify-center h-screen w-full py-4"
 				data-theme={mode ? "dark" : "retro"}
 			>
 				<Outlet />
