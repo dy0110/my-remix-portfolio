@@ -4,5 +4,12 @@
 	"editor.codeActionsOnSave": {
 		"source.organizeImports.biome": "explicit"
 	},
-	"cSpell.words": ["clsx", "daisyui", "Noto", "tailwindcss"]
+	"cSpell.words": [
+		"clsx",
+		"daisyui",
+		"Noto",
+		"tailwindcss",
+		"valtio",
+		"zustand"
+	]
 }

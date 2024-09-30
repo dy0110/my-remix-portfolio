@@ -4,10 +4,13 @@ import { useCallback } from "react";
 import Particles from "react-tsparticles";
 import type { Container, Engine } from "tsparticles-engine";
 import { loadSlim } from "tsparticles-slim";
+import { useSnapshot } from "valtio";
 import { Footer } from "~/components/Footer";
 import { Header } from "~/components/Header";
+import { store } from "~/valtio/store";
 
 export default function _layout() {
+	const mode = useSnapshot(store).darkMode;
 	const particlesInit = useCallback(async (engine: Engine) => {
 		await loadSlim(engine);
 	}, []);
@@ -19,15 +22,20 @@ export default function _layout() {
 		[],
 	);
 	return (
-		<div className="w-full h-screen flex flex-col absolute">
+		<div
+			className="w-full h-screen flex flex-col absolute"
+			data-theme={mode ? "dark" : "retro"}
+		>
 			<Header
 				className="sticky top-0 z-10"
-				darkMode={false}
+				darkMode={mode}
 				onClickAbout={() => {}}
 				onClickBlog={() => {}}
 				onClickGithub={() => {}}
 				onClickHome={() => {}}
-				onClickMode={() => {}}
+				onClickMode={() => {
+					store.darkMode = !mode;
+				}}
 			/>
 			<Particles
 				id="tsparticles"
@@ -54,7 +62,7 @@ export default function _layout() {
 							bubble: {
 								size: 8,
 								color: {
-									value: "#db2777",
+									value: mode ? "FFFFFF" : "#db2777",
 								},
 							},
 						},
@@ -101,7 +109,10 @@ export default function _layout() {
 					detectRetina: true,
 				}}
 			/>
-			<div className="flex justify-center h-screen w-ful" data-theme="retro">
+			<div
+				className="flex justify-center h-screen w-ful"
+				data-theme={mode ? "dark" : "retro"}
+			>
 				<Outlet />
 			</div>
 			<div className="z-10">

@@ -6,7 +6,7 @@ type Props = {
 
 export function TopPageCard({ text, buttonText, onClick }: Props) {
 	return (
-		<div className="card w-64 border border-solid border-slate-700 bg-base-100 z-10">
+		<div className="card w-64 border border-solid border-base-content bg-base-100 z-10">
 			<div className="card-body items-center text-center">
 				<p>{text}</p>
 				<div className="card-actions justify-end">
