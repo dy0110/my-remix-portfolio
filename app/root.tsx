@@ -31,7 +31,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
 				<Meta />
 				<Links />
 			</head>
-			<body className="font-sansJp bg-black">
+			<body className="font-sansJp">
 				{children}
 				<ScrollRestoration />
 				<Scripts />
@@ -45,5 +45,10 @@ export default function App() {
 }
 
 export function HydrateFallback() {
-	return <p>Loading...</p>;
+	return (
+		<div className="w-full h-screen flex justify-center items-center">
+			{/* biome-ignore lint/style/useSelfClosingElements: <explanation> */}
+			<span className="loading loading-ring loading-lg text-primary"></span>
+		</div>
+	);
 }

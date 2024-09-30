@@ -7,6 +7,7 @@ const meta: Meta<typeof Header> = {
 	title: "components/Header",
 	component: Header,
 	args: {
+		darkMode: true,
 		onClickAbout: fn(),
 		onClickBlog: fn(),
 		onClickGithub: fn(),
