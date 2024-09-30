@@ -1,4 +1,6 @@
 import type { MetaFunction } from "@remix-run/node";
+import { useNavigate } from "@remix-run/react";
+import { $path } from "remix-routes";
 import { TopPageCard } from "~/components/TopPageCard";
 
 export const meta: MetaFunction = () => {
@@ -9,6 +11,7 @@ export const meta: MetaFunction = () => {
 };
 
 export default function Index() {
+	const navigate = useNavigate();
 	return (
 		<div className="h-full w-full flex flex-col items-center justify-center gap-12 z-10">
 			<div className="w-full flex flex-col items-center gap-2">
@@ -23,7 +26,9 @@ export default function Index() {
 				<TopPageCard
 					text="製作者についてはこちら"
 					buttonText="About"
-					onClick={() => {}}
+					onClick={() => {
+						navigate($path("/about"));
+					}}
 				/>
 				<TopPageCard
 					text="ブログについてはこちら"

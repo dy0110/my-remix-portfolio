@@ -5,7 +5,7 @@ import { GithubLine, MoonLine, SunLine } from "../Icons";
 const headerStyle = tv({
 	slots: {
 		content: "flex items-center gap-8 justify-between",
-		buttonStyle: "btn btn-ghost btn-md",
+		buttonStyle: "btn btn-ghost btn-md text-base-content",
 		iconStyle: "btn btn-circle btn-sm",
 	},
 });
