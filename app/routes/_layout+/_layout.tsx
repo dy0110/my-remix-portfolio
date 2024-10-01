@@ -28,7 +28,9 @@ export default function _layout() {
 				onClickAbout={() => {
 					navigate($path("/about"));
 				}}
-				onClickBlog={() => {}}
+				onClickBlog={() => {
+					navigate($path("/posts"));
+				}}
 				onClickGithub={() => {
 					window.open("https://github.com/dy0110");
 				}}

@@ -33,7 +33,9 @@ export default function Index() {
 				<TopPageCard
 					text="ブログについてはこちら"
 					buttonText="Blog"
-					onClick={() => {}}
+					onClick={() => {
+						navigate($path("/posts"));
+					}}
 				/>
 			</div>
 		</div>
