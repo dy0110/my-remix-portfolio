@@ -23,3 +23,19 @@ export type AboutResult = {
 	offset: number;
 	limit: number;
 };
+
+export type Post = {
+	id: string;
+	createdAt: string;
+	updatedAt: string;
+	title: string;
+	tags?: string;
+	content: string;
+};
+
+export type PostsResult = {
+	contents: Post[];
+	totalCount: number;
+	offset: number;
+	limit: number;
+};

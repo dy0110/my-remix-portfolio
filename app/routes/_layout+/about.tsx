@@ -20,9 +20,8 @@ export const clientLoader = async () => {
 export default function About() {
 	const { image, name, birthday, from, introduction, skills, interest } =
 		useLoaderData<typeof clientLoader>();
-	console.log(parseRichTextToDom(introduction));
 	return (
-		<div className="card bg-base-100 w-[70%] h-full drop-shadow-md overflow-y-scroll">
+		<div className="card bg-base-100 w-[70%] h-full drop-shadow-md overflow-y-scroll opacity-95">
 			<div className="card-body">
 				<h2 className="card-title text-base-content">About Me</h2>
 				<figure className="px-10 pt-10">
