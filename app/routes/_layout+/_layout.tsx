@@ -1,4 +1,7 @@
 import { Outlet, useNavigate } from "@remix-run/react";
+import hljs from "highlight.js";
+import rust from "highlight.js/lib/languages/rust";
+import typescript from "highlight.js/lib/languages/typescript";
 import { useCallback } from "react";
 // eslint-disable-next-line import/no-named-as-default
 import Particles from "react-tsparticles";
@@ -9,6 +12,7 @@ import { useSnapshot } from "valtio";
 import { Footer } from "~/components/Footer";
 import { Header } from "~/components/Header";
 import { store } from "~/valtio/store";
+import "highlight.js/styles/github-dark.min.css";
 
 export default function _layout() {
 	const navigate = useNavigate();
@@ -16,6 +20,9 @@ export default function _layout() {
 	const particlesInit = useCallback(async (engine: Engine) => {
 		await loadSlim(engine);
 	}, []);
+
+	hljs.registerLanguage("typescript", typescript);
+	hljs.registerLanguage("rust", rust);
 
 	return (
 		<div
