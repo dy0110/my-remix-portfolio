@@ -8,6 +8,7 @@
 		"clsx",
 		"daisyui",
 		"dompurify",
+		"hljs",
 		"microcms",
 		"Noto",
 		"tailwindcss",

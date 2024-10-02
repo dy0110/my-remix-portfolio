@@ -9,6 +9,10 @@ export const clientLoader = async () => {
 	try {
 		const result = await client.get<PostsResult>({
 			endpoint: "posts",
+			queries: {
+				limit: 10,
+				offset: 0,
+			},
 		});
 
 		return result.contents;
@@ -37,9 +41,7 @@ export default function Posts() {
 									date={format(createdAt, { date: "short", time: "short" })}
 									tags={tags?.split(",")}
 									onClick={() => {
-										// TODO 記事ページへ遷移させる
-										console.log(id);
-										navigate($path("/"));
+										navigate($path("/posts/:postId", { postId: id }));
 									}}
 								/>
 							))}
