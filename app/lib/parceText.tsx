@@ -73,7 +73,8 @@ export const parseRichTextToDom = (text: string) => {
 
 			if (domNode.type === "tag" && domNode.name === "a") {
 				return (
-					<a {...domNode.attribs} className="link link-accent leading-loose">
+					// eslint-disable-next-line jsx-a11y/anchor-is-valid
+					<a className="link link-accent leading-loose" target="_blank">
 						{domToReact(domNode.children as DOMNode[], options)}
 					</a>
 				);
