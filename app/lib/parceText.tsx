@@ -7,6 +7,20 @@ import parse, {
 	type HTMLReactParserOptions,
 	type Element,
 } from "html-react-parser";
+import { tv } from "tailwind-variants";
+
+const headingStyle = tv({
+	base: "text-base-content border-b-2 border-solid border-secondary my-[20px]",
+	variants: {
+		tagName: {
+			h1: "text-3xl",
+			h2: "text-2xl",
+			h3: "text-xl",
+			h4: "text-lg",
+			h5: "text-base",
+		},
+	},
+});
 
 export const parseRichTextToDom = (text: string) => {
 	const sanitizedText = DOMPurify.sanitize(text);
@@ -14,7 +28,7 @@ export const parseRichTextToDom = (text: string) => {
 		replace(domNode) {
 			if (domNode.type === "tag" && domNode.name === "h1") {
 				return (
-					<h1 className="text-base-content text-3xl leading-loose">
+					<h1 className={headingStyle({ tagName: "h1" })}>
 						{domToReact(domNode.children as DOMNode[], options)}
 					</h1>
 				);
@@ -22,15 +36,16 @@ export const parseRichTextToDom = (text: string) => {
 
 			if (domNode.type === "tag" && domNode.name === "h2") {
 				return (
-					<h2 className="text-base-content text-2xl leading-loose">
+					<h2 className={headingStyle({ tagName: "h2" })}>
 						{domToReact(domNode.children as DOMNode[], options)}
 					</h2>
 				);
 			}
 
 			if (domNode.type === "tag" && domNode.name === "h3") {
+				console.log(headingStyle({ tagName: "h3" }));
 				return (
-					<h3 className="text-base-content text-xl leading-loose">
+					<h3 className={headingStyle({ tagName: "h3" })}>
 						{domToReact(domNode.children as DOMNode[], options)}
 					</h3>
 				);
@@ -38,7 +53,7 @@ export const parseRichTextToDom = (text: string) => {
 
 			if (domNode.type === "tag" && domNode.name === "h4") {
 				return (
-					<h4 className="text-base-content text-lg leading-loose">
+					<h4 className={headingStyle({ tagName: "h4" })}>
 						{domToReact(domNode.children as DOMNode[], options)}
 					</h4>
 				);
@@ -46,10 +61,7 @@ export const parseRichTextToDom = (text: string) => {
 
 			if (domNode.type === "tag" && domNode.name === "h5") {
 				return (
-					<h5
-						{...domNode.attribs}
-						className="text-base-content text-base leading-loose"
-					>
+					<h5 className={headingStyle({ tagName: "h5" })}>
 						{domToReact(domNode.children as DOMNode[], options)}
 					</h5>
 				);
