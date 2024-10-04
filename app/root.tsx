@@ -8,6 +8,8 @@ import {
 } from "@remix-run/react";
 
 import "./tailwind.css";
+import { useEffect, useState } from "react";
+import { Spinner } from "./components/Spinner";
 
 export const links: LinksFunction = () => [
 	{ rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -45,10 +47,15 @@ export default function App() {
 }
 
 export function HydrateFallback() {
-	return (
-		<div className="w-full h-screen flex justify-center items-center">
-			{/* biome-ignore lint/style/useSelfClosingElements: <explanation> */}
-			<span className="loading loading-ring loading-lg text-primary"></span>
-		</div>
-	);
+	const [showChild, setShowChild] = useState(false);
+
+	useEffect(() => {
+		setShowChild(true);
+	}, []);
+
+	if (!showChild) {
+		return null;
+	}
+
+	return <Spinner />;
 }
