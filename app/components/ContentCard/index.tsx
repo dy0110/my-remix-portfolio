@@ -7,7 +7,7 @@ type Props = {
 
 export function ContentCard({ title, date, tags, onClick }: Props) {
 	return (
-		<div className="card bg-base-100 w-full drop-shadow-md">
+		<article className="card bg-base-100 w-full drop-shadow-md opacity-95">
 			<div className="card-body flex flex-col gap-4">
 				<div className="flex flex-col gap-2">
 					<h2 className="card-title">{title}</h2>
@@ -30,6 +30,6 @@ export function ContentCard({ title, date, tags, onClick }: Props) {
 					全文を見る
 				</button>
 			</div>
-		</div>
+		</article>
 	);
 }

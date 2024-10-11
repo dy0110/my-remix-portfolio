@@ -15,7 +15,7 @@ export const clientLoader = async () => {
 			},
 		});
 
-		return result.contents;
+		return result;
 	} catch (error) {
 		console.error("posts clientLoader error", error);
 		return;
@@ -23,32 +23,30 @@ export const clientLoader = async () => {
 };
 
 export default function Posts() {
-	const contents = useLoaderData<typeof clientLoader>();
+	const { contents } = useLoaderData<typeof clientLoader>();
 	const navigate = useNavigate();
 	return (
-		<div className="card bg-base-100 w-[70%] h-full drop-shadow-md overflow-y-scroll opacity-95">
-			<div className="card-body">
-				<h2 className="card-title text-base-content">Posts</h2>
-				<div className="flex flex-col gap-5">
-					{contents.length === 0 ? (
-						<p>記事がありません</p>
-					) : (
-						<>
-							{contents.map(({ id, title, createdAt, tags }, index) => (
-								<ContentCard
-									key={index}
-									title={title}
-									date={format(createdAt, { date: "short", time: "short" })}
-									tags={tags?.split(",")}
-									onClick={() => {
-										navigate($path("/posts/:postId", { postId: id }));
-									}}
-								/>
-							))}
-						</>
-					)}
+		<div className="h-full w-full flex flex-col items-center justify-center gap-12 z-10 p-8">
+			<h2 className="text-xl text-base-content text-left w-full font-semibold">
+				Posts
+			</h2>
+			{contents.length === 0 ? (
+				<p className="text-center">記事がありません</p>
+			) : (
+				<div className="w-full grid gap-5 grid-cols-[repeat(2,minmax(340px,1fr))] overflow-y-scroll p-2">
+					{contents.map(({ id, title, createdAt, tags }, index) => (
+						<ContentCard
+							key={index}
+							title={title}
+							date={format(createdAt, { date: "short", time: "short" })}
+							tags={tags?.split(",")}
+							onClick={() => {
+								navigate($path("/posts/:postId", { postId: id }));
+							}}
+						/>
+					))}
 				</div>
-			</div>
+			)}
 		</div>
 	);
 }
