@@ -86,7 +86,7 @@ export const parseRichTextToDom = (text: string) => {
 			if (domNode.type === "tag" && domNode.name === "a") {
 				return (
 					// eslint-disable-next-line jsx-a11y/anchor-is-valid
-					<a className="link link-accent leading-loose" target="_blank">
+					<a className="link link-accent" target="_blank">
 						{domToReact(domNode.children as DOMNode[], options)}
 					</a>
 				);
@@ -102,9 +102,17 @@ export const parseRichTextToDom = (text: string) => {
 
 			if (domNode.type === "tag" && domNode.name === "ol") {
 				return (
-					<ul {...domNode.attribs} className="list-decimal pl-4">
+					<ol {...domNode.attribs} className="list-decimal pl-4">
 						{domToReact(domNode.children as DOMNode[], options)}
-					</ul>
+					</ol>
+				);
+			}
+
+			if (domNode.type === "tag" && domNode.name === "li") {
+				return (
+					<li {...domNode.attribs} className="text-base-content leading-normal">
+						{domToReact(domNode.children as DOMNode[], options)}
+					</li>
 				);
 			}
 
@@ -122,9 +130,24 @@ export const parseRichTextToDom = (text: string) => {
 			if (domNode.type === "tag" && domNode.name === "figure") {
 				const { class: className, ...other } = domNode.attribs;
 				return (
-					<figure {...other} className={clsx("py-2", className || "")}>
+					<figure
+						{...other}
+						className={clsx("py-2 flex flex-col", className || "")}
+					>
 						{domToReact(domNode.children as DOMNode[], options)}
 					</figure>
+				);
+			}
+
+			if (domNode.type === "tag" && domNode.name === "figcaption") {
+				const { class: className, ...other } = domNode.attribs;
+				return (
+					<figcaption
+						{...other}
+						className={clsx("w-full text-left", className || "")}
+					>
+						{domToReact(domNode.children as DOMNode[], options)}
+					</figcaption>
 				);
 			}
 

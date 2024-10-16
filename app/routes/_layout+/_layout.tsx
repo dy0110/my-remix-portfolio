@@ -119,12 +119,12 @@ export default function _layout() {
 					detectRetina: true,
 				}}
 			/>
-			<div
+			<main
 				className="flex justify-center h-screen w-full py-4"
 				data-theme={mode ? "dark" : "retro"}
 			>
 				<Outlet />
-			</div>
+			</main>
 			<div className="z-10">
 				<Footer />
 			</div>

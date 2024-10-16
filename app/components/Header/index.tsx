@@ -33,7 +33,7 @@ export function Header({
 	return (
 		<header
 			className={clsx(
-				"h-[84px] w-full py-1 px-7 flex items-center justify-between bg-base-100 drop-shadow-md",
+				"h-[84px] w-full py-1 px-7 flex items-center justify-between bg-base-100 drop-shadow-md z-20",
 				className,
 			)}
 		>
