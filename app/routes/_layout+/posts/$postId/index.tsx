@@ -49,7 +49,10 @@ export default function PostId() {
 						</div>
 						<div className="flex gap-2">
 							{contents.tags?.split(",").map((tag, index) => (
-								<div key={index} className="badge badge-accent text-xs">
+								<div
+									key={index}
+									className="badge badge-accent text-xs overflow-hidden whitespace-nowrap text-ellipsis min-w-[48px]"
+								>
 									{tag}
 								</div>
 							))}

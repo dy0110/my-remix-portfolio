@@ -16,7 +16,10 @@ export function ContentCard({ title, date, tags, onClick }: Props) {
 				{tags && (
 					<div className="flex gap-2">
 						{tags.map((tag, index) => (
-							<div key={index} className="badge badge-accent text-xs">
+							<div
+								key={index}
+								className="badge badge-accent text-xs overflow-hidden whitespace-nowrap text-ellipsis"
+							>
 								{tag}
 							</div>
 						))}
