@@ -2,7 +2,7 @@ import { format } from "@formkit/tempo";
 import { useLoaderData, useNavigate } from "@remix-run/react";
 import { $path } from "remix-routes";
 import { ContentCard } from "~/components/ContentCard";
-import { LeftFill, RightFill } from "~/components/Icons";
+// import { LeftFill, RightFill } from "~/components/Icons";
 import { client } from "~/lib/client";
 import type { PostsResult } from "~/lib/types";
 
@@ -24,7 +24,7 @@ export const clientLoader = async () => {
 };
 
 export default function Posts() {
-	const { contents, totalCount } = useLoaderData<typeof clientLoader>();
+	const { contents } = useLoaderData<typeof clientLoader>();
 	const navigate = useNavigate();
 	return (
 		<div className="h-full w-full flex flex-col items-center justify-center gap-12 z-10 p-8">
@@ -48,7 +48,7 @@ export default function Posts() {
 					))}
 				</div>
 			)}
-			{totalCount >= 10 && (
+			{/* {totalCount >= 10 && (
 				<div className="w-full flex items-center justify-items-center justify-center">
 					<div className="join grid grid-cols-2">
 						<button
@@ -65,7 +65,7 @@ export default function Posts() {
 						</button>
 					</div>
 				</div>
-			)}
+			)} */}
 		</div>
 	);
 }
