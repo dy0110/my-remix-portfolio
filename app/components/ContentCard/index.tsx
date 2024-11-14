@@ -1,3 +1,5 @@
+import { useSearchParams } from "@remix-run/react";
+
 type Props = {
 	title: string;
 	date: string;
@@ -6,6 +8,7 @@ type Props = {
 };
 
 export function ContentCard({ title, date, tags, onClick }: Props) {
+	const [, setSearchParams] = useSearchParams();
 	return (
 		<article className="card bg-base-100 w-full drop-shadow-md opacity-95">
 			<div className="card-body flex flex-col gap-4">
@@ -16,12 +19,18 @@ export function ContentCard({ title, date, tags, onClick }: Props) {
 				{tags && (
 					<div className="flex gap-2">
 						{tags.map((tag, index) => (
-							<div
+							<button
+								type="button"
+								onClick={() => {
+									const params = new URLSearchParams();
+									params.set("tag", encodeURI(tag));
+									setSearchParams(params);
+								}}
 								key={index}
-								className="badge badge-accent text-xs overflow-hidden whitespace-nowrap text-ellipsis"
+								className="btn btn-accent btn-xs rounded-full text-xs overflow-hidden whitespace-nowrap text-ellipsis min-w-[48px]"
 							>
 								{tag}
-							</div>
+							</button>
 						))}
 					</div>
 				)}

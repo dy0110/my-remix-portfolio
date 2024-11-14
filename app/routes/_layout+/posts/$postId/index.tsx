@@ -1,5 +1,10 @@
 import { format } from "@formkit/tempo";
-import { type ClientLoaderFunctionArgs, useLoaderData } from "@remix-run/react";
+import {
+	type ClientLoaderFunctionArgs,
+	useLoaderData,
+	useNavigate,
+} from "@remix-run/react";
+import { $path } from "remix-routes";
 import { z } from "zod";
 import { zx } from "zodix";
 import { client } from "~/lib/client";
@@ -31,6 +36,7 @@ export const clientLoader = async ({ params }: ClientLoaderFunctionArgs) => {
 
 export default function PostId() {
 	const contents = useLoaderData<typeof clientLoader>();
+	const navigate = useNavigate();
 	return (
 		<div className="card bg-base-100 w-[80%] overflow-y-scroll drop-shadow-md  opacity-95 ">
 			<div className="card-body  flex flex-col gap-4">
@@ -49,12 +55,20 @@ export default function PostId() {
 						</div>
 						<div className="flex gap-2">
 							{contents.tags?.split(",").map((tag, index) => (
-								<div
+								<button
+									type="button"
+									onClick={() => {
+										navigate(
+											$path("/posts", {
+												tag: encodeURI(tag),
+											}),
+										);
+									}}
 									key={index}
-									className="badge badge-accent text-xs overflow-hidden whitespace-nowrap text-ellipsis min-w-[48px]"
+									className="btn btn-accent btn-xs rounded-full text-xs overflow-hidden whitespace-nowrap text-ellipsis min-w-[48px]"
 								>
 									{tag}
-								</div>
+								</button>
 							))}
 						</div>
 						<div>{parseRichTextToDom(contents.content)}</div>
