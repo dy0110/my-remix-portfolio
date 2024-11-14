@@ -43,7 +43,6 @@ export const parseRichTextToDom = (text: string) => {
 			}
 
 			if (domNode.type === "tag" && domNode.name === "h3") {
-				console.log(headingStyle({ tagName: "h3" }));
 				return (
 					<h3 className={headingStyle({ tagName: "h3" })}>
 						{domToReact(domNode.children as DOMNode[], options)}
@@ -144,7 +143,7 @@ export const parseRichTextToDom = (text: string) => {
 				return (
 					<figcaption
 						{...other}
-						className={clsx("w-full text-left", className || "")}
+						className={clsx("w-full text-center", className || "")}
 					>
 						{domToReact(domNode.children as DOMNode[], options)}
 					</figcaption>
