@@ -120,7 +120,7 @@ export default function _layout() {
 				}}
 			/>
 			<main
-				className="flex justify-center h-screen w-full py-4"
+				className="flex justify-center items-start h-screen w-full py-4"
 				data-theme={mode ? "dark" : "retro"}
 			>
 				<Outlet />

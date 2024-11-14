@@ -5,22 +5,31 @@ import {
 	useNavigate,
 } from "@remix-run/react";
 import { $path } from "remix-routes";
+import { z } from "zod";
+import { zx } from "zodix";
 import { ContentCard } from "~/components/ContentCard";
 // import { LeftFill, RightFill } from "~/components/Icons";
 import { client } from "~/lib/client";
 import type { PostsResult } from "~/lib/types";
 
 export const clientLoader = async ({ request }: ClientLoaderFunctionArgs) => {
-	const url = new URL(request.url);
-	const queryTag = url.searchParams.get("tag");
+	const parseRequest = zx.parseQuerySafe(request, {
+		tag: z.string().optional(),
+	});
+
+	if (!parseRequest.success) {
+		return;
+	}
+
 	try {
+		const queryTag = parseRequest.data.tag;
 		const result = await client.get<PostsResult>({
 			endpoint: "posts",
 			queries: {
 				limit: 10,
 				offset: 0,
 				filters:
-					queryTag === null
+					queryTag === undefined
 						? undefined
 						: `tags[contains]${decodeURI(queryTag)}`,
 			},
@@ -39,25 +48,27 @@ export default function Posts() {
 	const navigate = useNavigate();
 	return (
 		<div className="h-full w-full flex flex-col items-center justify-center gap-12 z-10 p-8">
-			<h2 className="text-xl text-base-content text-left w-full font-semibold">
-				Posts
-			</h2>
 			{contents === undefined || contents?.length === 0 ? (
-				<p className="text-center">記事がありません</p>
+				<p className="text-center text-2xl">記事がありません</p>
 			) : (
-				<div className="w-full grid gap-5 grid-cols-[repeat(2,minmax(340px,1fr))] overflow-y-scroll p-2">
-					{contents.map(({ id, title, createdAt, tags }, index) => (
-						<ContentCard
-							key={index}
-							title={title}
-							date={format(createdAt, { date: "short", time: "short" })}
-							tags={tags?.split(",")}
-							onClick={() => {
-								navigate($path("/posts/:postId", { postId: id }));
-							}}
-						/>
-					))}
-				</div>
+				<>
+					<h2 className="text-xl text-base-content text-left w-full font-semibold">
+						Posts
+					</h2>
+					<div className="w-full grid gap-5 grid-cols-[repeat(2,minmax(340px,1fr))] overflow-y-scroll p-2">
+						{contents.map(({ id, title, createdAt, tags }, index) => (
+							<ContentCard
+								key={index}
+								title={title}
+								date={format(createdAt, { date: "short", time: "short" })}
+								tags={tags?.split(",")}
+								onClick={() => {
+									navigate($path("/posts/:postId", { postId: id }));
+								}}
+							/>
+						))}
+					</div>
+				</>
 			)}
 			{/* {totalCount >= 10 && (
 				<div className="w-full flex items-center justify-items-center justify-center">
