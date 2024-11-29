@@ -16,6 +16,7 @@ const config: StorybookConfig = {
 		"@storybook/addon-backgrounds",
 		"storybook-addon-remix-react-router",
 		"storybook-addon-data-theme-switcher",
+		"storybook-addon-remix-react-router",
 	],
 	framework: {
 		name: "@storybook/react-vite",

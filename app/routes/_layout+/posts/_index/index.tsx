@@ -8,7 +8,7 @@ import { $path } from "remix-routes";
 import { z } from "zod";
 import { zx } from "zodix";
 import { ContentCard } from "~/components/ContentCard";
-// import { LeftFill, RightFill } from "~/components/Icons";
+import { Pagination } from "~/components/Pagination";
 import { client } from "~/lib/client";
 import type { PostsResult } from "~/lib/types";
 
@@ -45,7 +45,9 @@ export const clientLoader = async ({ request }: ClientLoaderFunctionArgs) => {
 export default function Posts() {
 	const result = useLoaderData<typeof clientLoader>();
 	const contents = result?.contents;
+	const totalCount = result?.totalCount;
 	const navigate = useNavigate();
+
 	return (
 		<div className="h-full w-full flex flex-col items-center justify-center gap-12 z-10 p-8">
 			{contents === undefined || contents?.length === 0 ? (
@@ -70,24 +72,12 @@ export default function Posts() {
 					</div>
 				</>
 			)}
-			{/* {totalCount >= 10 && (
-				<div className="w-full flex items-center justify-items-center justify-center">
-					<div className="join grid grid-cols-2">
-						<button
-							type="button"
-							disabled
-							className="join-item btn btn-outline"
-						>
-							<LeftFill />
-							前へ
-						</button>
-						<button type="button" className="join-item btn btn-outline">
-							<RightFill />
-							次へ
-						</button>
+			{!totalCount ||
+				(totalCount > 10 && (
+					<div className="w-full flex items-center justify-items-center justify-center">
+						<Pagination totalCount={totalCount} />
 					</div>
-				</div>
-			)} */}
+				))}
 		</div>
 	);
 }
