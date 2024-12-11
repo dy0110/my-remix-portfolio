@@ -1,5 +1,6 @@
-import { useSearchParams } from "@remix-run/react";
+import { useNavigate, useSearchParams } from "@remix-run/react";
 import clsx from "clsx";
+import { $path } from "remix-routes";
 import { tv } from "tailwind-variants";
 import { LeftFill, RightFill } from "../Icons";
 
@@ -23,20 +24,23 @@ type Props = {
 };
 
 export function Pagination({ totalCount, className }: Props) {
+	const navigate = useNavigate();
 	const [searchParams, setSearchParams] = useSearchParams();
 	const page = searchParams.get("page");
 	const { root, buttonStyle } = paginationStyle();
+	const disabled = Math.round(totalCount / 10) === Number.parseInt(page ?? "0");
 
 	return (
 		<div className={clsx(className, root())}>
 			<button
 				type="button"
-				disabled={page === null || Number.parseInt(page) === 1}
+				disabled={page === null}
 				className={buttonStyle({
-					disabled: page === null || Number.parseInt(page) === 1,
+					disabled: page === null,
 				})}
 				onClick={() => {
-					if (!page) {
+					if (!page || page === "1") {
+						navigate($path("/posts"));
 						return;
 					}
 					const backPage = Number.parseInt(page) - 1;
@@ -44,7 +48,7 @@ export function Pagination({ totalCount, className }: Props) {
 					params.set("page", encodeURI(backPage.toString()));
 					setSearchParams(params);
 				}}
-				aria-disabled={page === null || Number.parseInt(page) === 1}
+				aria-disabled={page === null}
 			>
 				<LeftFill />
 				前へ
@@ -52,16 +56,16 @@ export function Pagination({ totalCount, className }: Props) {
 			<button
 				type="button"
 				className={buttonStyle({
-					disabled: totalCount / 10 === Number.parseInt(page ?? "0"),
+					disabled,
 				})}
-				disabled={totalCount / 10 === Number.parseInt(page ?? "0")}
+				disabled={disabled}
 				onClick={() => {
 					const forwardPage = !page ? 1 : Number.parseInt(page) + 1;
 					const params = new URLSearchParams();
 					params.set("page", encodeURI(forwardPage.toString()));
 					setSearchParams(params);
 				}}
-				aria-disabled={page === null}
+				aria-disabled={page === null || disabled}
 			>
 				<RightFill />
 				次へ

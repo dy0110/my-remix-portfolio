@@ -15,6 +15,7 @@ import type { PostsResult } from "~/lib/types";
 export const clientLoader = async ({ request }: ClientLoaderFunctionArgs) => {
 	const parseRequest = zx.parseQuerySafe(request, {
 		tag: z.string().optional(),
+		page: z.optional(zx.NumAsString),
 	});
 
 	if (!parseRequest.success) {
@@ -22,16 +23,14 @@ export const clientLoader = async ({ request }: ClientLoaderFunctionArgs) => {
 	}
 
 	try {
-		const queryTag = parseRequest.data.tag;
+		const { tag, page } = parseRequest.data;
 		const result = await client.get<PostsResult>({
 			endpoint: "posts",
 			queries: {
 				limit: 10,
-				offset: 0,
+				offset: page === undefined ? 0 : page * 10,
 				filters:
-					queryTag === undefined
-						? undefined
-						: `tags[contains]${decodeURI(queryTag)}`,
+					tag === undefined ? undefined : `tags[contains]${decodeURI(tag)}`,
 			},
 		});
 
