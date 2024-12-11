@@ -8,7 +8,7 @@ import { $path } from "remix-routes";
 import { z } from "zod";
 import { zx } from "zodix";
 import { client } from "~/lib/client";
-import { parseRichTextToDom } from "~/lib/parceText";
+import { parseRichTextToDom } from "~/lib/parseText";
 import type { Post } from "~/lib/types";
 
 export const clientLoader = async ({ params }: ClientLoaderFunctionArgs) => {

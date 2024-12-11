@@ -1,7 +1,7 @@
 import { useLoaderData } from "@remix-run/react";
 import { Avatar } from "~/components/Avatar";
 import { client } from "~/lib/client";
-import { parseRichTextToDom } from "~/lib/parceText";
+import { parseRichTextToDom } from "~/lib/parseText";
 import type { AboutResult } from "~/lib/types";
 
 export const clientLoader = async () => {

@@ -8,11 +8,13 @@
 		"clsx",
 		"daisyui",
 		"dompurify",
+		"formkit",
 		"hljs",
 		"microcms",
 		"Noto",
 		"tailwindcss",
 		"valtio",
+		"zodix",
 		"zustand"
 	]
 }
