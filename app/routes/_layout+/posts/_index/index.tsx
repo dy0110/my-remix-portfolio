@@ -19,7 +19,8 @@ export const clientLoader = async ({ request }: ClientLoaderFunctionArgs) => {
 	});
 
 	if (!parseRequest.success) {
-		return;
+		console.error("posts parse params error", parseRequest.error);
+		throw new Response("不正なパラメーターです。", { status: 400 });
 	}
 
 	try {
@@ -37,7 +38,7 @@ export const clientLoader = async ({ request }: ClientLoaderFunctionArgs) => {
 		return result;
 	} catch (error) {
 		console.error("posts clientLoader error", error);
-		return;
+		throw new Response("投稿一覧の取得に失敗しました。", { status: 400 });
 	}
 };
 
@@ -69,14 +70,14 @@ export default function Posts() {
 							/>
 						))}
 					</div>
+					{!totalCount ||
+						(totalCount > 10 && (
+							<div className="w-full flex items-center justify-items-center justify-center">
+								<Pagination totalCount={totalCount} />
+							</div>
+						))}
 				</>
 			)}
-			{!totalCount ||
-				(totalCount > 10 && (
-					<div className="w-full flex items-center justify-items-center justify-center">
-						<Pagination totalCount={totalCount} />
-					</div>
-				))}
 		</div>
 	);
 }

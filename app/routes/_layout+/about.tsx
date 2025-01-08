@@ -13,7 +13,7 @@ export const clientLoader = async () => {
 		return result.contents[0];
 	} catch (error) {
 		console.error("about clientLoader error", error);
-		return;
+		throw new Response("プロフィールが見つかりませんでした。", { status: 404 });
 	}
 };
 

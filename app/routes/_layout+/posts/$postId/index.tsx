@@ -17,7 +17,8 @@ export const clientLoader = async ({ params }: ClientLoaderFunctionArgs) => {
 	});
 
 	if (!parseParams.success) {
-		return;
+		console.error("postId parse params error", parseParams.error);
+		throw new Response("不正なパラメーターです。", { status: 400 });
 	}
 
 	try {
@@ -29,8 +30,8 @@ export const clientLoader = async ({ params }: ClientLoaderFunctionArgs) => {
 
 		return result;
 	} catch (error) {
-		console.error("posts clientLoader error", error);
-		return;
+		console.error("postId clientLoader error", error);
+		throw new Response("記事が見つかりませんでした。", { status: 404 });
 	}
 };
 

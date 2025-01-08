@@ -1,5 +1,6 @@
 import { Outlet, useNavigate } from "@remix-run/react";
 import hljs from "highlight.js";
+import kotlin from "highlight.js/lib/languages/kotlin";
 import rust from "highlight.js/lib/languages/rust";
 import typescript from "highlight.js/lib/languages/typescript";
 import { useCallback } from "react";
@@ -23,6 +24,7 @@ export default function _layout() {
 
 	hljs.registerLanguage("typescript", typescript);
 	hljs.registerLanguage("rust", rust);
+	hljs.registerLanguage("kotlin", kotlin);
 
 	return (
 		<div
