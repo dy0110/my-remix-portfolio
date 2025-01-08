@@ -39,3 +39,8 @@ export type PostsResult = {
 	offset: number;
 	limit: number;
 };
+
+export type ErrorObj = {
+	data: string;
+	status: number;
+};
