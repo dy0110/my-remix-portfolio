@@ -1,4 +1,4 @@
-import { useLoaderData } from "@remix-run/react";
+import { useLoaderData } from "react-router";
 import { Avatar } from "~/components/Avatar";
 import { client } from "~/lib/client";
 import { parseRichTextToDom } from "~/lib/parseText";

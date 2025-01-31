@@ -1,4 +1,4 @@
-import type { LinksFunction } from "@remix-run/node";
+import type { LinksFunction } from "react-router";
 import {
 	Links,
 	Meta,
@@ -7,11 +7,11 @@ import {
 	ScrollRestoration,
 	useNavigate,
 	useRouteError,
-} from "@remix-run/react";
+} from "react-router";
 
 import "./tailwind.css";
 import { useEffect, useState } from "react";
-import { $path } from "remix-routes";
+import { $path } from "safe-routes";
 import { useSnapshot } from "valtio";
 import { Spinner } from "./components/Spinner";
 import type { ErrorObj } from "./lib/types";

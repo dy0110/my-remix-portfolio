@@ -1,6 +1,6 @@
-import { useNavigate, useSearchParams } from "@remix-run/react";
 import clsx from "clsx";
-import { $path } from "remix-routes";
+import { useNavigate, useSearchParams } from "react-router";
+import { $path } from "safe-routes";
 import { tv } from "tailwind-variants";
 import { LeftFill, RightFill } from "../Icons";
 

@@ -3,8 +3,8 @@ import {
 	type ClientLoaderFunctionArgs,
 	useLoaderData,
 	useNavigate,
-} from "@remix-run/react";
-import { $path } from "remix-routes";
+} from "react-router";
+import { $path } from "safe-routes";
 import { z } from "zod";
 import { zx } from "zodix";
 import { client } from "~/lib/client";

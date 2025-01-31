@@ -1,0 +1,5 @@
+app/routes/*
+app/lib/*
+app/valtio/*
+app/*.ts
+app/*.tsx
