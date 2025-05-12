@@ -5,5 +5,6 @@ node_modules
 /public/build
 .env
 .react-router/
+.vercel/
 
 *storybook.log

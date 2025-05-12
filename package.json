@@ -46,6 +46,7 @@
 		"@react-router/dev": "^7.0.0",
 		"@react-router/fs-routes": "^7.1.4",
 		"@react-router/remix-routes-option-adapter": "^7.1.4",
+		"@remix-run/server-runtime": "^2.16.6",
 		"@storybook/addon-backgrounds": "^8.3.3",
 		"@storybook/addon-essentials": "^8.3.3",
 		"@storybook/addon-interactions": "^8.3.3",
