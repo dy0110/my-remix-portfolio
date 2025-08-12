@@ -4,5 +4,7 @@ node_modules
 /build
 /public/build
 .env
+.react-router/
+.vercel/
 
 *storybook.log

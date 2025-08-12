@@ -1,4 +1,4 @@
-import type { LinksFunction } from "@remix-run/node";
+import type { LinksFunction } from "react-router";
 import {
 	Links,
 	Meta,
@@ -7,11 +7,11 @@ import {
 	ScrollRestoration,
 	useNavigate,
 	useRouteError,
-} from "@remix-run/react";
+} from "react-router";
 
 import "./tailwind.css";
 import { useEffect, useState } from "react";
-import { $path } from "remix-routes";
+import { $path } from "safe-routes";
 import { useSnapshot } from "valtio";
 import { Spinner } from "./components/Spinner";
 import type { ErrorObj } from "./lib/types";
@@ -67,41 +67,28 @@ export function HydrateFallback() {
 }
 
 export function ErrorBoundary() {
-	const navigate = useNavigate();
 	const mode = useSnapshot(store).darkMode;
 	const error = useRouteError() as ErrorObj;
 
 	return (
-		<html lang="ja">
-			<head>
-				<title>エラーが発生しました。</title>
-				<Meta />
-				<Links />
-			</head>
-			<body
-				className="w-full h-screen flex flex-col absolute"
-				data-theme={mode ? "dark" : "retro"}
-			>
-				<main
-					className="flex justify-center flex-col items-center h-screen w-full p-4"
-					data-theme={mode ? "dark" : "retro"}
+		<main
+			className="flex justify-center flex-col items-center h-screen w-full p-4"
+			data-theme={mode ? "dark" : "retro"}
+		>
+			<h1 className="text-5xl font-bold">{error.status}</h1>
+			<h2 className="text-2xl mt-4">{error.data}</h2>
+			<div className="w-full mt-2 flex justify-center">
+				<button
+					type="button"
+					className="btn btn-link btn-lg"
+					onClick={() => {
+						location.replace(location.origin);
+					}}
 				>
-					<h1 className="text-5xl font-bold">{error.status}</h1>
-					<h2 className="text-2xl mt-4">{error.data}</h2>
-					<div className="w-full mt-2 flex justify-center">
-						<button
-							type="button"
-							className="btn btn-link btn-lg"
-							onClick={() => {
-								navigate($path("/"));
-							}}
-						>
-							トップへ戻る
-						</button>
-					</div>
-				</main>
-				<Scripts />
-			</body>
-		</html>
+					トップへ戻る
+				</button>
+			</div>
+			<Scripts />
+		</main>
 	);
 }

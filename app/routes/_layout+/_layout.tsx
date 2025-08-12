@@ -1,12 +1,11 @@
-import { Outlet, useNavigate } from "@remix-run/react";
 import hljs from "highlight.js";
 import kotlin from "highlight.js/lib/languages/kotlin";
 import rust from "highlight.js/lib/languages/rust";
 import typescript from "highlight.js/lib/languages/typescript";
 import { useCallback } from "react";
-// eslint-disable-next-line import/no-named-as-default
+import { Outlet, useNavigate } from "react-router";
 import Particles from "react-tsparticles";
-import { $path } from "remix-routes";
+import { $path } from "safe-routes";
 import type { Engine } from "tsparticles-engine";
 import { loadSlim } from "tsparticles-slim";
 import { useSnapshot } from "valtio";

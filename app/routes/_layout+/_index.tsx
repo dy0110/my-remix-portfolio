@@ -1,6 +1,6 @@
-import type { MetaFunction } from "@remix-run/node";
-import { useNavigate } from "@remix-run/react";
-import { $path } from "remix-routes";
+import type { MetaFunction } from "react-router";
+import { useNavigate } from "react-router";
+import { $path } from "safe-routes";
 import { TopPageCard } from "~/components/TopPageCard";
 
 export const meta: MetaFunction = () => {
