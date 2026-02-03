@@ -92,33 +92,37 @@ export const parseRichTextToDom = (text: string) => {
 			}
 
 			if (domNode.type === "tag" && domNode.name === "ul") {
+				const { style, ...rest } = domNode.attribs;
 				return (
-					<ul {...domNode.attribs} className="list-disc pl-4">
+					<ul {...rest} className="list-disc pl-4">
 						{domToReact(domNode.children as DOMNode[], options)}
 					</ul>
 				);
 			}
 
 			if (domNode.type === "tag" && domNode.name === "ol") {
+				const { style, ...rest } = domNode.attribs;
 				return (
-					<ol {...domNode.attribs} className="list-decimal pl-4">
+					<ol {...rest} className="list-decimal pl-4">
 						{domToReact(domNode.children as DOMNode[], options)}
 					</ol>
 				);
 			}
 
 			if (domNode.type === "tag" && domNode.name === "li") {
+				const { style, ...rest } = domNode.attribs;
 				return (
-					<li {...domNode.attribs} className="text-base-content leading-normal">
+					<li {...rest} className="text-base-content leading-normal">
 						{domToReact(domNode.children as DOMNode[], options)}
 					</li>
 				);
 			}
 
 			if (domNode.type === "tag" && domNode.name === "blockquote") {
+				const { style, ...rest } = domNode.attribs;
 				return (
 					<blockquote
-						{...domNode.attribs}
+						{...rest}
 						className="border-l-4 border-base-content italic pl-4 py-4 leading-loose"
 					>
 						{domToReact(domNode.children as DOMNode[], options)}
@@ -127,7 +131,7 @@ export const parseRichTextToDom = (text: string) => {
 			}
 
 			if (domNode.type === "tag" && domNode.name === "figure") {
-				const { class: className, ...other } = domNode.attribs;
+				const { class: className, style, ...other } = domNode.attribs;
 				return (
 					<figure
 						{...other}
@@ -139,7 +143,7 @@ export const parseRichTextToDom = (text: string) => {
 			}
 
 			if (domNode.type === "tag" && domNode.name === "figcaption") {
-				const { class: className, ...other } = domNode.attribs;
+				const { class: className, style, ...other } = domNode.attribs;
 				return (
 					<figcaption
 						{...other}
@@ -151,7 +155,7 @@ export const parseRichTextToDom = (text: string) => {
 			}
 
 			if (domNode.type === "tag" && domNode.name === "pre") {
-				const { class: className, ...other } = domNode.attribs;
+				const { class: className, style, ...other } = domNode.attribs;
 				return (
 					<pre
 						{...other}
@@ -166,7 +170,7 @@ export const parseRichTextToDom = (text: string) => {
 			}
 
 			if (domNode.type === "tag" && domNode.name === "code") {
-				const { class: className, ...other } = domNode.attribs;
+				const { class: className, style, ...other } = domNode.attribs;
 				const parent = domNode.parentNode as unknown as Element;
 
 				return parent.name === "pre" ? (
