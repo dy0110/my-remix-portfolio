@@ -39,7 +39,7 @@ export default function PostId() {
 	const contents = useLoaderData<typeof clientLoader>();
 	const navigate = useNavigate();
 	return (
-		<div className="card bg-base-100 w-[80%] h-full overflow-y-scroll drop-shadow-md opacity-95">
+		<div className="card w-[80%] bg-base-100/60 backdrop-blur-md border border-base-content/10 rounded-3xl shadow-lg">
 			<div className="card-body flex flex-col gap-4">
 				{contents ? (
 					<>
