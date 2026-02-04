@@ -8,7 +8,7 @@ export function Footer({ className }: Props) {
 	return (
 		<footer
 			className={clsx(
-				"fixed bottom-4 left-1/2 -translate-x-1/2 w-full flex items-center justify-center z-20",
+				"w-full flex items-center justify-center z-20 pb-2",
 				className,
 			)}
 		>
