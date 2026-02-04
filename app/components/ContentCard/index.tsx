@@ -10,7 +10,7 @@ type Props = {
 export function ContentCard({ title, date, tags, onClick }: Props) {
 	const [, setSearchParams] = useSearchParams();
 	return (
-		<article className="card bg-base-100 w-full drop-shadow-md opacity-95">
+		<article className="card w-full bg-base-100/60 backdrop-blur-md border border-base-content/10 rounded-3xl shadow-lg hover:scale-[1.01] transition-transform">
 			<div className="card-body flex flex-col gap-4">
 				<div className="flex flex-col gap-2">
 					<h2 className="card-title">{title}</h2>

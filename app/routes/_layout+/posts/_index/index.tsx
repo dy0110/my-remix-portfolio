@@ -49,7 +49,7 @@ export default function Posts() {
 	const navigate = useNavigate();
 
 	return (
-		<div className="h-full w-full flex flex-col items-center justify-center gap-12 z-10 p-8">
+		<div className="w-full flex flex-col items-center gap-8 z-10 p-8 min-h-full">
 			{contents === undefined || contents?.length === 0 ? (
 				<p className="text-center text-2xl">記事がありません</p>
 			) : (
@@ -57,7 +57,7 @@ export default function Posts() {
 					<h2 className="text-xl text-base-content text-left w-full font-semibold">
 						Posts
 					</h2>
-					<div className="w-full grid gap-5 grid-cols-[repeat(2,minmax(340px,1fr))] overflow-y-scroll p-2">
+					<div className="w-full grid gap-5 grid-cols-[repeat(2,minmax(340px,1fr))] p-2">
 						{contents.map(({ id, title, createdAt, tags }, index) => (
 							<ContentCard
 								key={index}

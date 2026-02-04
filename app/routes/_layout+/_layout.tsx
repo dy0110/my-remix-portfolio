@@ -27,11 +27,10 @@ export default function _layout() {
 
 	return (
 		<div
-			className="w-full h-screen flex flex-col absolute"
+			className="w-full min-h-screen flex flex-col relative"
 			data-theme={mode ? "dark" : "retro"}
 		>
 			<Header
-				className="sticky top-0 z-10"
 				darkMode={mode}
 				onClickAbout={() => {
 					navigate($path("/about"));
@@ -121,7 +120,7 @@ export default function _layout() {
 				}}
 			/>
 			<main
-				className="flex justify-center items-start h-screen w-full py-4"
+				className="flex justify-center items-start min-h-screen w-full pt-28 pb-12 px-4"
 				data-theme={mode ? "dark" : "retro"}
 			>
 				<Outlet />
