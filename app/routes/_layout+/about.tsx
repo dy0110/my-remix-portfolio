@@ -21,7 +21,7 @@ export default function About() {
 	const { image, name, birthday, from, introduction, skills, interest } =
 		useLoaderData<typeof clientLoader>();
 	return (
-		<div className="card bg-base-100 w-[70%] h-full drop-shadow-md overflow-y-scroll opacity-95">
+		<div className="card w-[70%] bg-base-100/60 backdrop-blur-md border border-base-content/10 rounded-3xl shadow-lg">
 			<div className="card-body">
 				<h2 className="card-title text-base-content">About Me</h2>
 				<figure className="px-10 pt-10">

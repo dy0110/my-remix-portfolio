@@ -1,4 +1,5 @@
 import clsx from "clsx";
+import { useMemo } from "react";
 import { useNavigate, useSearchParams } from "react-router";
 import { $path } from "safe-routes";
 import { tv } from "tailwind-variants";
@@ -28,7 +29,11 @@ export function Pagination({ totalCount, className }: Props) {
 	const [searchParams, setSearchParams] = useSearchParams();
 	const page = searchParams.get("page");
 	const { root, buttonStyle } = paginationStyle();
-	const disabled = Math.round(totalCount / 10) === Number.parseInt(page ?? "0");
+	const disabled = useMemo(() => {
+		const currentPage = Number.parseInt(page ?? "0");
+		const maxPage = Math.ceil(totalCount / 10) - 1;
+		return currentPage >= maxPage;
+	}, [page, totalCount]);
 
 	return (
 		<div className={clsx(className, root())}>

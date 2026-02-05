@@ -2,24 +2,18 @@ import hljs from "highlight.js";
 import kotlin from "highlight.js/lib/languages/kotlin";
 import rust from "highlight.js/lib/languages/rust";
 import typescript from "highlight.js/lib/languages/typescript";
-import { useCallback } from "react";
 import { Outlet, useNavigate } from "react-router";
-import Particles from "react-tsparticles";
 import { $path } from "safe-routes";
-import type { Engine } from "tsparticles-engine";
-import { loadSlim } from "tsparticles-slim";
 import { useSnapshot } from "valtio";
 import { Footer } from "~/components/Footer";
 import { Header } from "~/components/Header";
+import { PixelBlast } from "~/components/PixelBlast";
 import { store } from "~/valtio/store";
 import "highlight.js/styles/github-dark.min.css";
 
 export default function _layout() {
 	const navigate = useNavigate();
 	const mode = useSnapshot(store).darkMode;
-	const particlesInit = useCallback(async (engine: Engine) => {
-		await loadSlim(engine);
-	}, []);
 
 	hljs.registerLanguage("typescript", typescript);
 	hljs.registerLanguage("rust", rust);
@@ -27,11 +21,10 @@ export default function _layout() {
 
 	return (
 		<div
-			className="w-full h-screen flex flex-col absolute"
+			className="w-full min-h-screen flex flex-col relative z-0"
 			data-theme={mode ? "dark" : "retro"}
 		>
 			<Header
-				className="sticky top-0 z-10"
 				darkMode={mode}
 				onClickAbout={() => {
 					navigate($path("/about"));
@@ -49,81 +42,16 @@ export default function _layout() {
 					store.darkMode = !mode;
 				}}
 			/>
-			<Particles
-				id="tsparticles"
-				init={particlesInit}
-				options={{
-					fpsLimit: 120,
-					interactivity: {
-						events: {
-							onHover: {
-								enable: true,
-								mode: "bubble",
-							},
-							resize: true,
-						},
-						modes: {
-							push: {
-								quantity: 4,
-							},
-							repulse: {
-								distance: 200,
-								duration: 0.4,
-							},
-							bubble: {
-								size: 8,
-								color: {
-									value: mode ? "FFFFFF" : "#db2777",
-								},
-							},
-						},
-					},
-					particles: {
-						color: {
-							value: "random",
-						},
-						links: {
-							color: {
-								value: "random",
-							},
-							enable: true,
-							opacity: 0.8,
-							width: 2,
-						},
-						move: {
-							direction: "none",
-							enable: true,
-							outModes: {
-								default: "bounce",
-							},
-							random: false,
-							speed: 5,
-							straight: false,
-						},
-						number: {
-							density: {
-								enable: true,
-								area: 800,
-							},
-							value: 80,
-						},
-						opacity: {
-							value: 0.5,
-						},
-						shape: {
-							type: "circle",
-						},
-						size: {
-							value: { min: 1, max: 5 },
-						},
-					},
-					detectRetina: true,
-				}}
+			<PixelBlast
+				className="fixed inset-0 -z-10"
+				variant="diamond"
+				pixelSize={8}
+				color={mode ? "#793ef9" : "#ef9995"}
+				speed={2}
+				patternScale={8}
+				edgeFade={0.1}
 			/>
-			<main
-				className="flex justify-center items-start h-screen w-full py-4"
-				data-theme={mode ? "dark" : "retro"}
-			>
+			<main className="flex justify-center items-start min-h-screen w-full pt-28 pb-12 px-4">
 				<Outlet />
 			</main>
 			<div className="z-10">

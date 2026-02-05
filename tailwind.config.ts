@@ -10,7 +10,7 @@ export default {
 	theme: {
 		extend: {
 			fontFamily: {
-				sansJp: ['"Noto Sans JP"'],
+				sansJp: ['"M PLUS 1p"'],
 			},
 		},
 	},
